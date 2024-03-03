@@ -31,13 +31,13 @@ happyfox/
 │
 ├── alembic.ini               # Alembic configuration file
 ├── constants.py              # Global constants
-├── credentials.json          # Gmail API credentials (ignore)
+├── credentials.json          # Gmail API credentials (ignore using .gitignore)
 ├── docker-compose.yml        # Docker Compose file for running PostgreSQL
 ├── fetch_email.py            # Script to fetch emails
 ├── process_email.py          # Script to process emails
 ├── pyproject.toml            # Poetry project file
 ├── poetry.lock               # Poetry lock file (dependencies)
-└── token.pickle              # Gmail API token (ignore)
+└── token.pickle              # Gmail API token (ignore using .gitignore)
 ```
 
 ## Prerequisites
