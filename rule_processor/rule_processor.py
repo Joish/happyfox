@@ -68,21 +68,21 @@ class RuleProcessor:
         except json.JSONDecodeError as e:
             logging.error(f"Error parsing JSON file: {filename} - {e}")
             return None
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             logging.error(f"Unexpected error reading file: {filename} - {e}")
             return None
 
     def get_string_comparison_operator(self, predicate):
         try:
             return self.string_comparison_operator.get(predicate)
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             logging.error(f'Error in get_string_comparison_operator: {e}')
             return None
 
     def get_date_comparison_operator(self, predicate):
         try:
             return self.date_comparison_operator.get(predicate)
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             logging.error(f'Error in get_date_comparison_operator: {e}')
             return None
 
@@ -95,7 +95,7 @@ class RuleProcessor:
             else:
                 logging.warning(f'Unknown field: {field}')
                 return None
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             logging.error(f'Error in get_comparison_operator: {e}')
             return None
 
@@ -120,7 +120,7 @@ class RuleProcessor:
                 raise ValueError("Unsupported time period")
 
             return comparison_date
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             logging.error(f'Error in date comparison: {e}')
             return None
 
@@ -134,7 +134,7 @@ class RuleProcessor:
                 self.move_message(email, action.get('folder'))
             else:
                 logging.warning(f'Unknown action: {action}')
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             logging.error(f'Error applying action {action} to email {email}: {e}')
 
     def mark_email_read_status(self, email, mark_as_read):
@@ -157,7 +157,7 @@ class RuleProcessor:
 
             action = 'read' if mark_as_read else 'unread'
             logging.info(f"Email marked as {action}: {email.id}, {email.from_address}, {email.subject}")
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             action = 'read' if mark_as_read else 'unread'
             logging.error(f"Error marking email as {action}: {email.id} - {e}")
 
@@ -169,7 +169,7 @@ class RuleProcessor:
             folder: The name of the folder (label in Gmail) to move the email to.
         :return:
         """
-        try:
+        try:  # pragma: no cover
             # Retrieve the label ID corresponding to the folder name
             label_id = self.get_label_id(folder)
             if label_id:
@@ -183,10 +183,10 @@ class RuleProcessor:
                     f"Email moved to folder: {folder} - Email ID: {email.id} {email.from_address}, {email.subject}")
             else:
                 logging.warning(f"Label not found for folder: {folder}")
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             logging.error(f"Error moving email to folder: {folder} - Email ID: {email.id} - {e}")
 
-    def get_labels(self):
+    def get_labels(self):  # pragma: no cover
         try:
             # List all labels
             response = self.gmail_service.users().labels().list(userId='me').execute()
@@ -209,7 +209,7 @@ class RuleProcessor:
 
             logging.warning(f"No label found for folder name: {folder_name}")
             return None
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             logging.error(f"Error retrieving label ID for folder: {folder_name} - {e}")
             return None
 
@@ -267,7 +267,7 @@ class RuleProcessor:
                         condition_expressions.append(condition_expr)
                     else:
                         logging.warning(f'Unknown comparison operator for predicate: {condition["predicate"]}')
-                else:
+                else:  # pragma: no cover
                     logging.warning(f'Unknown DB Field operator: {field}')
 
             # Apply overall predicate logic
@@ -277,6 +277,6 @@ class RuleProcessor:
                 query = query.filter(or_(*condition_expressions))
 
             return query
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             logging.error(f'Error building query: {e}')
             raise

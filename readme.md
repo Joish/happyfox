@@ -45,6 +45,7 @@ happyfox/
 - Poetry for Python dependency management
 - Gmail API credentials in `credentials.json`
 - Docker and Docker Compose for running the PostgreSQL database
+- Virtual Env for this project setup
 
 ## Setup and Installation
 
@@ -75,19 +76,20 @@ happyfox/
 ## Running the Application
 To fetch and process emails:
 ```bash
-poetry run python fetch_email.py
-poetry run python process_email.py
+python fetch_email.py
+python process_email.py
 ```
 
 ## Testing
 - Unit tests can be added in a `tests/` directory.
 - Use `pytest` to run tests:
   ```bash
-  poetry run pytest
+  coverage run -m unittest discover -s tests
   ```
 
-## Contributing
-Contributions to this project are welcome. Please adhere to standard Python development practices.
+## Note on Production Readiness
+This project was developed as part of an interview task. While the code has been written with production setup and best practices in mind, it is not intended for deployment in a production environment as-is. This codebase serves as a demonstration of coding standards, design patterns, and practices suitable for a production-level application, but further testing, development, and security considerations are required before actual production use.
+
 
 ## License
 MIT 

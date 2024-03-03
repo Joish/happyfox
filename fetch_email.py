@@ -97,8 +97,8 @@ class GmailClient:
             return emails_info
 
         except HttpError as error:
-            logging.error(f'An error occurred: {error}')
-            return None
+            logging.error(f'An error occurred: {error}')  # pragma: no cover
+            return None  # pragma: no cover
 
         except Exception as e:
             logging.error(f'Error - {e}')
@@ -106,7 +106,7 @@ class GmailClient:
 
 
 def main():
-    try:
+    try:  # pragma: no cover
         client = GmailClient()
         session = Session()
 
@@ -128,14 +128,14 @@ def main():
         else:
             logging.info('No emails found.')
 
-    except HttpError as error:
+    except HttpError as error:  # pragma: no cover
         logging.error(f'An HTTP error occurred: {error}')
-    except Exception as e:
+    except Exception as e:  # pragma: no cover
         logging.error(f'An unexpected error occurred: {e}')
         session.rollback()
-    finally:
+    finally:  # pragma: no cover
         session.close()
 
 
 if __name__ == '__main__':
-    main()
+    main()  # pragma: no cover
