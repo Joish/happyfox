@@ -1,0 +1,6 @@
+credentials.json
+token.pickle
+.coverage
+.idea/
+__pycache__/
+.DS_Store

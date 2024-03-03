@@ -1,0 +1,52 @@
+{
+  "rules": [
+    {
+      "id": 1,
+      "description": "Rule for filtering emails from a specific sender",
+      "overall_predicate": "All",
+      "conditions": [
+        {
+          "field": "From",
+          "predicate": "Contains",
+          "value": "canarabank@canarabank.com"
+        },
+        {
+          "field": "Subject",
+          "predicate": "Does not Contain",
+          "value": "spam"
+        }
+      ],
+      "actions": [
+        {
+          "action": "Mark as read"
+        },
+        {
+          "action": "Move Message",
+          "folder": "Important"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Rule for recent emails",
+      "overall_predicate": "Any",
+      "conditions": [
+        {
+          "field": "Received",
+          "predicate": "Less than",
+          "value": "1 days"
+        },
+        {
+          "field": "Received",
+          "predicate": "Greater than",
+          "value": "1 days"
+        }
+      ],
+      "actions": [
+        {
+          "action": "Mark as unread"
+        }
+      ]
+    }
+  ]
+}
